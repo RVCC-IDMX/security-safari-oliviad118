@@ -1,8 +1,8 @@
 import { API_KEY } from "./config.js";
 
-// VULNERABILITY: innerHTML with user input
+// FIXED: Use textContent instead of innerHTML to prevent XSS
 function displayMessage(userInput) {
-  document.getElementById("output").innerHTML = userInput;
+  document.getElementById("output").textContent = `You said: ${userInput}`;
 }
 
 // VULNERABILITY: eval with user input
@@ -14,7 +14,7 @@ function calculate(expression) {
 document.getElementById("poll-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const response = document.getElementById("response").value;
-  displayMessage(`You said: ${response}`);
+  displayMessage(response);
 });
 
 document.getElementById("calc-form").addEventListener("submit", (e) => {
